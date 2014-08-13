@@ -7,6 +7,8 @@ using namespace std;
 int main(){
 
 	int count=5000;
+	printf("Enter the length of the sequence: ");
+	scanf("%d",&count);
 	fstream oFile;
 	oFile.open("input.txt",ios::out);
 	

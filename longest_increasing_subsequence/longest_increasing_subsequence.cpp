@@ -10,41 +10,24 @@ typedef int ui;
 
 int maxLengthSubsequence(const vector<ui>& iv){
 
-	vector<int> indices(iv.size(),-1);
-	int maxVal;
-	int maxIndex;
-
-	for(ui i=iv.size()-1;i>0;i--){
-		maxVal=-1;
-		maxIndex=-1;
-		for(int j=i-1;j>=0;j--){
-				
-			if(iv[j]<iv[i] && iv[j]>maxVal){
-				maxVal=iv[j];
-				maxIndex=j;
-			}
-
-		}
-
-		indices[i]=maxIndex;
-	}
-
-
-	vector<ui> lsLength(iv.size(),1);
-	int maxLength=0;
-
+	vector<ui> lis(iv.size(),1);
+	ui maxVal=1;
+	ui maxLis=1;	
+	
 	for(ui i=1;i<iv.size();i++){
-
-		if(indices[i]!=-1){
-			lsLength[i]=1+lsLength[indices[i]];
-				
-			if(lsLength[i]>maxLength)
-				maxLength=lsLength[i];
+		maxVal=0;
+		for(ui j=0;j<i;j++){
+			if(iv[i]>iv[j] && lis[j]>maxVal)
+				maxVal=lis[j];
 		}
+		lis[i]=1+maxVal;
+	
 
+		if(lis[i]>maxLis)
+			maxLis=lis[i];
 	}
-
-	return maxLength;
+	
+	return maxLis;
 }
 
 int main(){
